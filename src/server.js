@@ -24,27 +24,37 @@ export const startServer = () => {
   );
 
   // Роут для отримання всіх контактів
-  app.get('/contacts', async (req, res) => {
+  app.get('/contacts', async (req, res, next) => {
     const contacts = await getAllContacts();
     res.status(200).json({
+      status: 200,
+      message: 'Successfully found contacts!',
       data: contacts,
     });
   });
 
   // Роут для отримання контакту за ID
   app.get('/contacts/:contactId', async (req, res, next) => {
-    const { contactId } = req.params;
-    const contact = await getContactById(contactId);
+    try {
+      const { contactId } = req.params;
+      const contact = await getContactById(contactId);
 
-    if (!contact) {
-      return res.status(404).json({
-        message: 'Contact not found',
+      // Відповідь, якщо контакт не знайдено
+      if (!contact) {
+        return res.status(404).json({
+          message: 'Contact not found',
+        });
+      }
+
+      // Відповідь, якщо контакт знайдено
+      res.status(200).json({
+        status: 200,
+        message: `Successfully found contact with id ${contactId}!`,
+        data: contact,
       });
+    } catch (err) {
+      next(err); // Передача помилки в middleware для обробки помилок
     }
-
-    res.status(200).json({
-      data: contact,
-    });
   });
 
   // Роут для невідомих маршрутів
