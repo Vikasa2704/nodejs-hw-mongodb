@@ -25,6 +25,9 @@ export const startServer = () => {
       },
     }),
   );
+  app.get('/', (req, res) => {
+    res.status(200).send('Welcome to Contacts API');
+  });
 
   app.use(contactsRouter);
 
