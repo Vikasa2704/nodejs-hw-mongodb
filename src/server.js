@@ -26,6 +26,10 @@ export const startServer = () => {
     }),
   );
 
+  app.get('/', (req, res) => {
+    res.status(200).json({ message: 'Welcome to the Contacts API!' });
+  });
+
   app.use('/contacts', contactsRouter);
 
   app.use('*', notFoundHandler);
