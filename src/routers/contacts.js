@@ -45,10 +45,4 @@ router.post(
   ctrlWrapper(createContactController),
 );
 
-router.patch(
-  '/students/:studentId',
-  validateBody(updateContactSchema),
-  ctrlWrapper(patchContactController),
-);
-
 export default router;
