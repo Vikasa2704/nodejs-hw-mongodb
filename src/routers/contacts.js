@@ -25,12 +25,10 @@ router.get(
   ctrlWrapper(getContactByIdController),
 );
 
-router.post('/contacts', ctrlWrapper(createContactController));
-
-router.delete(
-  '/contacts/:contactId',
-  isValidId,
-  ctrlWrapper(deleteContactController),
+router.post(
+  '/contacts',
+  validateBody(createContactSchema),
+  ctrlWrapper(createContactController),
 );
 
 router.patch(
@@ -40,10 +38,10 @@ router.patch(
   ctrlWrapper(patchContactController),
 );
 
-router.post(
-  '/',
-  validateBody(createContactSchema),
-  ctrlWrapper(createContactController),
+router.delete(
+  '/contacts/:contactId',
+  isValidId,
+  ctrlWrapper(deleteContactController),
 );
 
 export default router;
