@@ -7,6 +7,7 @@ import { env } from './utils/env.js';
 import router from './routers/index.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
+import cookieParser from 'cookie-parser';
 
 const PORT = Number(env('PORT', '3000'));
 
@@ -16,6 +17,7 @@ export const startServer = () => {
   // Middleware для JSON парсингу та CORS
   app.use(express.json());
   app.use(cors());
+  app.use(cookieParser());
 
   // Підключення логгера pino як middleware
   app.use(
