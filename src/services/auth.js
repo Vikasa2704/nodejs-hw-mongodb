@@ -45,9 +45,6 @@ export const loginUser = async (payload) => {
   });
 };
 
-export const logoutUser = async (sessionId) => {
-  await SessionsCollection.deleteOne({ _id: sessionId });
-};
 
 const createSession = () => {
   const accessToken = randomBytes(30).toString('base64');
@@ -86,4 +83,8 @@ export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
     userId: session.userId,
     ...newSession,
   });
+};
+
+export const logoutUser = async (sessionId) => {
+  await SessionsCollection.deleteOne({ _id: sessionId });
 };
