@@ -11,4 +11,4 @@ const bootstrap = async () => {
   startServer();
 };
 
-bootstrap();
+void bootstrap();
